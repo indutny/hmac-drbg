@@ -1,0 +1,4 @@
+node_modules/
+test/
+npm-debug.log
+.travis.yml
