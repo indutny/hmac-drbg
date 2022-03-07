@@ -1,8 +1,10 @@
 'use strict';
 
-const assert = require('assert');
-const HmacDRBG = require('../');
-const hash = require('hash.js');
+import assert from 'assert';
+import HmacDRBG from '../lib/hmac-drbg.js';
+import hash from 'hash.js';
+import fs from "fs"
+import { resolve } from "path"
 
 describe('Hmac_DRBG', () => {
   it('should support hmac-drbg-sha256', () => {
@@ -40,7 +42,7 @@ describe('Hmac_DRBG', () => {
   });
 
   describe('NIST vector', function() {
-    require('./fixtures/hmac-drbg-nist.json').forEach(function (opt) {
+    JSON.parse(fs.readFileSync(resolve('test/fixtures/hmac-drbg-nist.json'))).forEach(function (opt) {
       it('should not fail at ' + opt.name, function() {
         const drbg = HmacDRBG({
           hash: hash.sha256,
